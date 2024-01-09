@@ -2,11 +2,12 @@ package database
 
 import (
 	"context"
+	"log"
+	"time"
+
 	"github.com/spf13/viper"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"log"
-	"time"
 )
 
 var db *mongo.Database
@@ -42,6 +43,8 @@ func mongoConnect() (*MongoDB, error) {
 		log.Fatalf("Failed to ping MongoDB server: %v", err)
 	}
 
-	db = client.Database(databaseName)
-	return &MongoDB{db}, nil
+	// db = client.Database(databaseName)
+	// return &MongoDB{db}, nil
+	DB = &MongoDB{db: client.Database(databaseName)}
+	return DB, nil
 }
